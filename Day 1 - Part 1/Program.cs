@@ -2,63 +2,30 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Xml.Schema;
 
 namespace _2023___1st__part_1_
 {
     internal class Program
     {
-
-        static int find(List<string> text)
+        static bool isNum(char letter)
         {
-            int num = 0;
-            foreach (string s in text)
+            switch (letter)
             {
-                string total = "";
-                foreach (char letter in s)
-                {
-
-                    switch (letter.ToString())
-                    {
-                        case "1":
-                            total += "1";
-                            break;
-                        case "2":
-                            total += "2";
-                            break;
-                        case "3":
-                            total += "3";
-                            break;
-                        case "4":
-                            total += "4";
-                            break;
-                        case "5":
-                            total += "5";
-                            break;
-                        case "6":
-                            total += "6";
-                            break;
-                        case "7":
-                            total += "7";
-                            break;
-                        case "8":
-                            total += "8";
-                            break;
-                        case "9":
-                            total += "9";
-                            break;
-                        default:
-                            total += "0";
-                            break;
-                    }
-                }
-                num += total[0] * 10;
-                total = total.Reverse().ToString();
-                num += total[0];
-                Console.WriteLine(num);
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                case '6':
+                case '7':
+                case '8':
+                case '9':
+                    return true;
+                default:
+                    return false;
             }
-            return num;
         }
-
         static void Main(string[] args)
         {
             using (StreamReader stream = new StreamReader("text.txt"))
@@ -68,16 +35,38 @@ namespace _2023___1st__part_1_
                 {
                     list.Add(stream.ReadLine());
                 }
-                for (int i = 0; i < list.Count; i++)
+                int result = 0;
+                foreach (string line in list)
                 {
-                    Console.WriteLine(list[i]);
+                    string total = "";
+                    for (int i = 0; i < line.Length; i++)
+                    {
+                        if (isNum(line[i]))
+                        {
+                            total += line[i];
+                            break;
+                        }
+                    }
+                    for (int i = line.Length - 1; i > -1; i--)
+                    {
+                        if (isNum(line[i]))
+                        {
+                            total += line[i];
+                            break;
+                        }
+                    }
+                    Console.WriteLine(total);
+                    result += int.Parse(total);
+                    Console.WriteLine(result);
                 }
-                find(list);
                 Console.ReadKey();
-
-
-
             }
         }
     }
 }
+
+
+
+
+
+
