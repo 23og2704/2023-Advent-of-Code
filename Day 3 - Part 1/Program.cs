@@ -36,7 +36,7 @@ namespace December_3rd
 
             return false;
         }
-        static void Main()
+        static void Main(string[] args)
         {
             int total = 0;
 
@@ -72,6 +72,7 @@ namespace December_3rd
             }
 
             Console.WriteLine(total);
+            Console.ReadKey();
         }
 
 
