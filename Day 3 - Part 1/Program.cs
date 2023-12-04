@@ -1,7 +1,5 @@
 ﻿using System;
 using System.IO;
-
-
 namespace December_3rd
 {
     internal class Program
@@ -10,17 +8,14 @@ namespace December_3rd
         {
             return (int)(c - '0');
         }
-
         static bool isSymbol(char c)
         {
             return !char.IsNumber(c) && !(c == '.');
         }
-
         static bool isValid(int x, int y, int numCols, int numRows)
         {
             return x >= 0 && x < numCols && y >= 0 && y < numRows;
         }
-
         static bool findPartNums(string[] lines, int i, int j, int place, int numCols, int numRows)
         {
             for (int y = i - 1; y <= i + 1; y++)
@@ -33,17 +28,14 @@ namespace December_3rd
                     }
                 }
             }
-
             return false;
         }
         static void Main(string[] args)
         {
             int total = 0;
-
             string[] lines = File.ReadAllLines("text.txt");
             int numberRows = lines.Length;
             int numberCols = lines[0].Length;
-
             for (int i = 0; i < numberRows; i++)
             {
                 for (int j = 0; j < numberCols; j++)
@@ -58,24 +50,18 @@ namespace December_3rd
                             num = num * 10 + toInt(lines[i][j + place]);
                             place++;
                         }
-
                         bool valid = findPartNums(lines, i, j, place, numberCols, numberRows);
-
                         if (valid)
                         {
                             total += num;
                         }
-
                         j += place;
                     }
                 }
             }
-
             Console.WriteLine(total);
             Console.ReadKey();
         }
 
-
     }
-
 }
